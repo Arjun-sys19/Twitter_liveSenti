@@ -4,16 +4,16 @@ from transformers import pipeline
 from dotenv import load_dotenv
 import os
 
-# Load API keys from environment variables
+
 load_dotenv("api.env")
 
-# Twitter API Keys (Set in api.env)
+
 BEARER_TOKEN = os.getenv("TWITTER_BEARER_TOKEN")
 
-# Initialize Tweepy Client
+
 client = tweepy.Client(bearer_token=BEARER_TOKEN, wait_on_rate_limit=True)
 
-# Load Sentiment Analysis Model
+
 sentiment_pipeline = pipeline("sentiment-analysis", model="ProsusAI/finbert")
 
 def analyze_sentiment(text):
@@ -25,7 +25,7 @@ def fetch_tweets(keyword, max_results=3):
     try:
         response = client.search_recent_tweets(
             query=keyword,
-            max_results=max_results,  # Reduce results per request
+            max_results=max_results, 
             tweet_fields=["created_at", "lang"],
             expansions=["author_id"]
         )
@@ -33,7 +33,7 @@ def fetch_tweets(keyword, max_results=3):
     
     except tweepy.TooManyRequests:
         print("⚠️ Rate limit exceeded. Waiting 60 seconds before retrying...")
-        time.sleep(60)  # Exponential Backoff
+        time.sleep(60)  
         return fetch_tweets(keyword, max_results)
 
 if __name__ == "__main__":
