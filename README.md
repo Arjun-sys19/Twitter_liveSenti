@@ -1,0 +1,1 @@
+This project is a Market Sentiment Analysis Bot that collects and analyzes tweets about cryptocurrency markets, specifically NEAR Protocol and memecoins. It uses NLP models to determine whether the sentiment is bullish, bearish, or neutral and provides real-time insights.
